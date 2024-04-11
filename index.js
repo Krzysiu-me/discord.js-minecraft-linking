@@ -75,7 +75,26 @@ async function rewardUser(user, minecraftUsername) {
     // Give the user a diamond sword as a reward
     const rewardMessage = `Congratulations! You have successfully linked your Discord account with Minecraft account: ${minecraftUsername}\n\nAs a reward, you received a Diamond Sword!`;
     await user.send(rewardMessage);
-    // Optionally, you can add code here to give the user the diamond sword in Minecraft using your server plugin
+    
+    // Give the user a diamond sword in Minecraft
+    try {
+        await giveDiamondSword(minecraftUsername);
+    } catch (error) {
+        console.error('Failed to give diamond sword to player:', error);
+        await user.send('An error occurred while giving you the Diamond Sword. Please contact an administrator for assistance.');
+    }
 }
+
+async function giveDiamondSword(minecraftUsername) {
+    // Here, you would implement code to give the player a diamond sword in Minecraft.
+    // Depending on your setup, this could involve executing a command on the Minecraft server or using a plugin's API.
+    // This function should handle the logic of giving the player the diamond sword.
+    // Example using DiscordSRV:
+    // await DiscordSRV.executeCommand(`minecraft:give ${minecraftUsername} diamond_sword`);
+    // Example using DiscordLink:
+    // await DiscordLink.giveItemToPlayer(minecraftUsername, 'diamond_sword');
+    // Replace these examples with the appropriate code based on your setup.
+}
+
 
 client.login(token);
